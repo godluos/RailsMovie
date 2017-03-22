@@ -1,6 +1,6 @@
 <div class="col-md-12">
   <div class="movie">
-    <%= link_to("New movie", new_movie_path, class: "btn btn-primary pull-right") %>
+    <%= link_to("添加新影片", new_movie_path, class: "btn btn-primary pull-right") %>
   </div>
   <table class="table table-hover">
     <thead>
@@ -8,6 +8,7 @@
         <td>⌘</td>
         <td>电影名称</td>
         <td>内容简介</td>
+        <td>创建者</td>
       </tr>
     </thead>
     <tbody>
@@ -16,10 +17,13 @@
           <td>⌘</td>
           <td><%= link_to(movie.title, movie_path(movie)) %></td>
           <td><%= movie.description %></td>
+          <td><%= movie.user.email %></td>
           <td>
-              <%= link_to("Edit", edit_movie_path(movie), class: "btn btn-sm btn-default")%>
-              <%= link_to("Delete", movie_path(movie),    class: "btn btn-sm btn-default",
+            <% if current_user && current_user == movie.user %>
+              <%= link_to("更改", edit_movie_path(movie), class: "btn btn-sm btn-default")%>
+              <%= link_to("删除", movie_path(movie),    class: "btn btn-sm btn-default",
                           method: :delete, data: { confirm: "Are you sure?" } )%>
+            <% end %>
           </td>
         </tr>
       <% end %>
