@@ -18,14 +18,20 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.new(movie_params)
-    @movie.save
-      redirect_to movies_path
+    if @movie.save
+       redirect_to movies_path
+    else
+       render :new
+    end
   end
 
   def update
     @movie = Movie.find(params[:id])
-    @movie.update(movie_params)
-      redirect_to movies_path, notice: "更新成功"
+    if @movie.update(movie_params)
+       redirect_to movies_path, notice: "更新成功"
+    else
+       render :edit
+    end
   end
 
   def destroy
