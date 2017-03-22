@@ -14,7 +14,7 @@
        <%= link_to("发表评论", new_movie_review_path(@movie), class: "btn btn-default pull-right")%>
     <% end %>
     <% if current_user && current_user == @movie.user %>
-       <%= link_to("更改", edit_movie_path(@movie), class: "btn btn-primary pull-right")%>
+       <%= link_to("编辑", edit_movie_path(@movie), class: "btn btn-primary pull-right")%>
     <% end %>
   </div>
   <h2><%= @movie.title %></h2>
@@ -31,7 +31,7 @@
     <tbody>
       <% @reviews.each do |review| %>
         <tr>
-          <td><%= review.content %></td>
+          <td><%= simple_format(review.content) %></td>
           <td><%= review.user.email %></td>
           <td><%= review.created_at %></td>
         </tr>

@@ -7,8 +7,8 @@
       <tr>
         <td>⌘</td>
         <td>电影名称</td>
-        <td>内容简介</td>
         <td>创建者</td>
+        <td>创建时间</td>
       </tr>
     </thead>
     <tbody>
@@ -16,11 +16,11 @@
         <tr>
           <td>⌘</td>
           <td><%= link_to(movie.title, movie_path(movie)) %></td>
-          <td><%= simple_format(movie.description) %></td>
           <td><%= movie.user.email %></td>
+          <td><%= movie.created_at %></td>
           <td>
             <% if current_user && current_user == movie.user %>
-              <%= link_to("更改", edit_movie_path(movie), class: "btn btn-sm btn-default")%>
+              <%= link_to("编辑", edit_movie_path(movie), class: "btn btn-sm btn-default")%>
               <%= link_to("删除", movie_path(movie),    class: "btn btn-sm btn-default",
                           method: :delete, data: { confirm: "Are you sure?" } )%>
             <% end %>
