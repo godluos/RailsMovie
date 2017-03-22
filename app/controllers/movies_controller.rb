@@ -25,6 +25,7 @@ class MoviesController < ApplicationController
     @movie = Movie.new(movie_params)
     @movie.user = current_user
     if @movie.save
+       current_user.join!(@movie)
        redirect_to movies_path
     else
        render :new
@@ -52,6 +53,32 @@ class MoviesController < ApplicationController
     flash[:alert] = "已删除电影"
     redirect_to movies_path
   end
+
+  def join
+    @movie = Movie.find(params[:id])
+
+     if !current_user.is_member_of?(@movie)
+       current_user.join!(@movie)
+       flash[:notice] = "成功关注本电影！"
+     else
+       flash[:warning] = "你看不到这句话的，呵呵"
+     end
+
+     redirect_to movie_path(@movie)
+   end
+
+   def quit
+     @movie = Movie.find(params[:id])
+
+     if current_user.is_member_of?(@movie)
+       current_user.quit!(@movie)
+       flash[:alert] = "不再关注该电影！"
+     else
+       flash[:warning] = "本来可以不要这句的，不过我觉得留着好点"
+     end
+
+     redirect_to movie_path(@movie)
+   end
 
 private
 
