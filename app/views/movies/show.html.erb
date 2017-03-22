@@ -3,11 +3,11 @@
 
   <span class="pull-right">
     <% if current_user && current_user.is_member_of?(@movie) %>
-        <label class="label label-success"> 未关注该电影 </label>
-           <%= link_to("关注电影", quit_movie_path(@movie), method: :review, class: "btn btn-default") %>
+        <label class="label label-success"> 已关注该电影 </label>
+           <%= link_to("取消关注", quit_movie_path(@movie), method: :review, class: "btn btn-default") %>
     <% else %>
-        <label class="label label-warning"> 已关注该电影 </label>
-           <%= link_to("取消关注", join_movie_path(@movie), method: :review, class: "btn btn-default") %>
+        <label class="label label-warning"> 未关注该电影 </label>
+           <%= link_to("关注电影", join_movie_path(@movie), method: :review, class: "btn btn-default") %>
     <% end %>
   </span>
 
