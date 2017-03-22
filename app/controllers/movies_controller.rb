@@ -59,7 +59,7 @@ class MoviesController < ApplicationController
 
      if !current_user.is_member_of?(@movie)
        current_user.join!(@movie)
-       flash[:notice] = "成功关注本电影！"
+       flash[:notice] = "成功关注该电影！"
      else
        flash[:warning] = "你看不到这句话的，呵呵"
      end
